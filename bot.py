@@ -19,7 +19,7 @@ logging.basicConfig(
 
 # --- Config ---
 BOT_TOKEN = "7950712207:AAHMIek-JXLy6fLrQMBHk-2hzFXdY1d0HG8"
-WEBHOOK_URL = "https://your-app-name.onrender.com/webhook"  # Change this!
+WEBHOOK_URL = "https://refer-to-earn-bot.onrender.com/webhook"  # Change this!
 CHECK_CHANNEL_ID = -1001441974665
 CHANNEL_LINK = "https://t.me/dailyearn11"
 BONUS_AMOUNT = 1
