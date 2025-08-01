@@ -1,4 +1,8 @@
-import logging from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup from telegram.ext import ( Application, CommandHandler, CallbackQueryHandler, ContextTypes ) from fastapi import FastAPI, Request from telegram.ext import ApplicationBuilder from datetime import datetime, timedelta import sqlite3 import asyncio import uvicorn
+import logging import sqlite3 import asyncio from datetime import datetime, timedelta
+
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup from telegram.ext import ( Application, CommandHandler, CallbackQueryHandler, ContextTypes, ApplicationBuilder )
+
+from fastapi import FastAPI, Request import uvicorn
 
 --- Logging ---
 
@@ -6,7 +10,7 @@ logging.basicConfig( format='%(asctime)s - %(name)s - %(levelname)s - %(message)
 
 --- Config ---
 
-BOT_TOKEN = "7950712207:AAHMIek-JXLy6fLrQMBHk-2hzFXdY1d0HG8" WEBHOOK_URL = "https://refer-to-earn-bot.com/webhook"  # Replace with actual Render URL CHECK_CHANNEL_ID = -1001441974665 CHANNEL_LINK = "https://t.me/dailyearn11" BONUS_AMOUNT = 1 REFERRAL_REWARD = 5 WITHDRAW_THRESHOLD = 50 DB_NAME = 'bot_data.db'
+BOT_TOKEN = "7950712207:AAHMIek-JXLy6fLrQMBHk-2hzFXdY1d0HG8" WEBHOOK_URL = "https://refer-to-earn-bot.onrender.com/webhook"  # Replace with actual Render URL CHECK_CHANNEL_ID = -1001441974665 CHANNEL_LINK = "https://t.me/dailyearn11" BONUS_AMOUNT = 1 REFERRAL_REWARD = 5 WITHDRAW_THRESHOLD = 50 DB_NAME = 'bot_data.db'
 
 --- FastAPI App ---
 
@@ -35,10 +39,6 @@ def create_user(user_id: int, ref_by: int = None): with sqlite3.connect(DB_NAME)
 def update_user_balance(user_id: int, new_balance: float): with sqlite3.connect(DB_NAME) as conn: cursor = conn.cursor() cursor.execute('UPDATE users SET balance = ? WHERE user_id = ?', (new_balance, user_id)) conn.commit()
 
 def update_user_last_bonus(user_id: int, last_bonus_time: datetime): with sqlite3.connect(DB_NAME) as conn: cursor = conn.cursor() cursor.execute('UPDATE users SET last_bonus = ? WHERE user_id = ?', (last_bonus_time.isoformat(), user_id)) conn.commit()
-
-(Handlers from your original code go here: start, handle_buttons, get_main_menu_keyboard, etc.)
-
-For brevity, they're not duplicated here but must be placed above startup()
 
 --- Startup ---
 
